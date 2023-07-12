@@ -38,12 +38,29 @@ Now the following works:
 * http://localhost:8080/swagger-ui/index.html
 * http://localhost:8080/api-docs
   as per the settings in application.properties.
-### Todo
+
 
 3. Creating an OCI image. I was able to create one using `./gradlew bootBuildImage` with the output of 
 'docker.io/library/books2:0.0.1-SNAPSHOT' but I don't know where it is stored. Maybe it tried to upload to docker.io?
 
+Had to do 
+1. `docker login`
+2. `docker tag books2:0.0.1-SNAPSHOT mirgroundhogdaydog/books2:0.0.1-SNAPSHOT`
+3. `docker push mirgroundhogdaydog/books2:0.0.1-SNAPSHOT`
 
+So now it is on hub.docker.com. But I can't see it locally with `docker container ls`
+`docker run mirgroundhogdaydog/books2:0.0.1-SNAPSHOT`
+`docker container ls`
+`docker container inspect priceless_mcnulty`
+provides the IP address
+                    "IPAddress": "172.17.0.2",
+and then http://172.17.0.2:8080/api-docs
+works!!
+### Todo
+1. turn debugging off
+2. get the container running in ECS
+3. make it accessible outside of AWS e.g. via API Gateway and load balancer?
+4. 
 ### Reference Documentation
 For further reference, please consider the following sections:
 
